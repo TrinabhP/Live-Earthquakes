@@ -1,7 +1,8 @@
 from quakeFuncs import *
 
-def main():
 
+def main():
+   
    earthquakes = read_quakes_from_file("quakes.txt")
 
 
