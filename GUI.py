@@ -1,34 +1,58 @@
 from tkinter import *
 from datetime import datetime, timedelta
+from quakeFuncs import *
+
+def display(earthquakes):
+	root = Tk()
+
+	root.title("Live-Earthquake Dashboard")
+	root.geometry('1000x800')
+
+	root.columnconfigure(0, weight=1)
+	root.columnconfigure(1, weight=1)
+	root.columnconfigure(2, weight=1)
+
+	title = Label(root, text="Earthquakes:\n-------------------------", font=("Times New Roman bold", 20), padx=0, pady=5)
+	title.grid(row=0, column=1, columnspan=1, pady=20, sticky='w')
+
+	time = Label(root, text=datetime.now().strftime("Time Now:\n%A, %B %d, %Y at %I:%M %p"))
+	time.grid(row=0,column=0, sticky='w')
 
 
-root = Tk()
-
-root.title("Live-Earthquake Dashboard")
-root.geometry('800x600')
-
-time = Label(root, text=datetime.now().strftime("Time Now:\n%A, %B %d, %Y at %I:%M %p"))
-time.pack()
-
-sort_button = Button(root, text='Sort')
-sort_button.pack()
-
-filter_button = Button(root, text='Filter')
-filter_button.pack()
-
-newquakes_button = Button(root, text='New Earthquakes')
-newquakes_button.pack()
-
-def saveFile():
-	message = Label(root, text="Saved to File")
-	message.pack()
 
 
-quit_button = Button(root, text='Quit', command=saveFile, fg='red')
-quit_button.pack()
+	sort_button = Button(root, text='Sort', font="Arial")
+	sort_button.grid(row=1, column=0, padx=10, pady=45, sticky='w')
+
+	filter_button = Button(root, text='Filter', font="Arial")
+	filter_button.grid(row=2, column=0, padx=10, pady=45, sticky='w')
+	 
+	newquakes_button = Button(root, text='New Earthquakes', font="Arial")
+	newquakes_button.grid(row=3, column=0, padx=10, pady=45, sticky='w')
 
 
-root.mainloop()
+	def saveFile():
+		message = Label(root, text="Saved to File")
+		message.grid(row=5, column=0, sticky='w')
+
+
+	quit_button = Button(root, text='Quit', command=saveFile, fg='red', font="Arial")
+	quit_button.grid(row=4, column=0, padx=10, pady=45, sticky='w')
+
+	rows = 1
+	for quake in earthquakes:
+	    current_quakes = Label(root, text="(%.2f) %40s at %s (%.3f, %.3f)" % (quake.mag, quake.place, time_to_str(quake.time), quake.longitude, quake.latitude), font=("Times New Roman", 12))
+	    current_quakes.grid(row=rows, column=1, sticky='n')
+	    rows += 1
+
+
+
+
+	root.mainloop()
+
+
+earthquakes = read_quakes_from_file("quakes.txt")
+display(earthquakes)
 
 """
 def display():
