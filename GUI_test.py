@@ -13,6 +13,12 @@ def sort_quakes():
 def filter_quakes():
 	pass
 
+def new_quakes():
+	pass
+
+def quit_quakes():
+	window.destroy()
+
 # window
 window = ttk.Window(themename = 'darkly')
 window.title("Live-Earthquake Dashboard")
@@ -26,8 +32,8 @@ title_label.pack()
 input_frame = ttk.Frame(master = window)
 sort_button = ttk.Button(master = input_frame, text = 'Sort', command = sort_quakes)
 filter_button = ttk.Button(master = input_frame, text = 'Filter', command = filter_quakes)
-new_button = ttk.Button(master = input_frame, text = 'New', command = sort_quakes)
-quit_button = ttk.Button(master = input_frame, text = 'Quit', command = filter_quakes)
+new_button = ttk.Button(master = input_frame, text = 'New', command = new_quakes)
+quit_button = ttk.Button(master = input_frame, text = 'Quit', command = quit_quakes)
 sort_button.pack(side = 'left', padx = 10)
 filter_button.pack(side = 'left')
 new_button.pack(side = 'left', padx = 10)
