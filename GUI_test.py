@@ -1,7 +1,10 @@
 import tkinter as tk
+from datetime import datetime, timedelta
+from quakeFuncs import *
 import ttkbootstrap as ttk
 import random
 import string
+
 
 
 def sort_quakes():
@@ -13,7 +16,7 @@ def filter_quakes():
 # window
 window = ttk.Window(themename = 'darkly')
 window.title("Live-Earthquake Dashboard")
-window.geometry('600x300')
+window.geometry('1200x600')
 
 # title
 title_label = ttk.Label(master = window, text = 'Earthquakes', font= 'Calibri 24 bold')
@@ -30,6 +33,13 @@ filter_button.pack(side = 'left')
 new_button.pack(side = 'left', padx = 10)
 quit_button.pack(side = 'left')
 input_frame.pack(pady = 10)
+
+earthquakes = read_quakes_from_file("quakes.txt")
+rows = 1
+for quake in earthquakes:
+	current_quakes = ttk.Label(window, text="(%.2f) %40s at %s (%.3f, %.3f)" % (quake.mag, quake.place, time_to_str(quake.time), quake.longitude, quake.latitude), font=("Times New Roman", 12))
+	current_quakes.pack(pady = 10)
+	rows += 1
 
 # output
 output_string = tk.StringVar()
