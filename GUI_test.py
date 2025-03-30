@@ -40,6 +40,7 @@ new_button.pack(side = 'left', padx = 10)
 quit_button.pack(side = 'left')
 input_frame.pack(pady = 10)
 
+
 earthquakes = read_quakes_from_file("quakes.txt")
 rows = 1
 for quake in earthquakes:
