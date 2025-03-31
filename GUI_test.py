@@ -6,6 +6,12 @@ import random
 import string
 
 
+def display_quakes(earthquakes):
+	rows = 1
+	for quake in earthquakes:
+		current_quakes = ttk.Label(window, text="(%.2f) %40s at %s (%.3f, %.3f)" % (quake.mag, quake.place, time_to_str(quake.time), quake.longitude, quake.latitude), font=("Times New Roman", 12))
+		current_quakes.pack(pady = 10)
+		rows += 1
 
 def sort_quakes():
 	pass
@@ -42,11 +48,7 @@ input_frame.pack(pady = 10)
 
 
 earthquakes = read_quakes_from_file("quakes.txt")
-rows = 1
-for quake in earthquakes:
-	current_quakes = ttk.Label(window, text="(%.2f) %40s at %s (%.3f, %.3f)" % (quake.mag, quake.place, time_to_str(quake.time), quake.longitude, quake.latitude), font=("Times New Roman", 12))
-	current_quakes.pack(pady = 10)
-	rows += 1
+display_quakes(earthquakes)
 
 # output
 output_string = tk.StringVar()
